@@ -79,7 +79,8 @@ mod r#async {
         /// Returns the device name.
         fn device_name(&self) -> impl Future<Output = Result<String, Error>> + Send;
 
-        /// Returns the user friendly device name.
+        /// Returns a human-readable device name suitable for display to users,
+        /// which may differ from the technical device identifier returned by `device_name`.
         fn friendly_device_name(&self) -> impl Future<Output = Result<String, Error>> + Send;
 
         /// Returns the current brightness as a percentage.

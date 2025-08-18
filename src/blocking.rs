@@ -25,7 +25,8 @@ pub trait Brightness {
     /// Returns the device name.
     fn device_name(&self) -> Result<String, Error>;
 
-    /// Returns the user friendly device name.
+    /// Returns a human-readable device name suitable for display to users.
+    /// This may differ from the technical device identifier returned by `device_name()`.
     fn friendly_device_name(&self) -> Result<String, Error>;
 
     /// Returns the current brightness as a percentage.

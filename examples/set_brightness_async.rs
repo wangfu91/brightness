@@ -24,7 +24,7 @@ async fn run(percentage: u32) {
 async fn show_brightness(dev: &BrightnessDevice) -> Result<(), brightness::Error> {
     println!(
         "Brightness of device {} is {}%",
-        dev.device_name().await?,
+        dev.friendly_device_name().await?,
         dev.get().await?
     );
     Ok(())

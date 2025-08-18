@@ -59,6 +59,7 @@ pub(crate) struct BlockingDeviceImpl {
     physical_monitor: WrappedPhysicalMonitor,
     file_handle: WrappedFileHandle,
     device_name: String,
+    friendly_name: String,
     /// Note: PHYSICAL_MONITOR.szPhysicalMonitorDescription == DISPLAY_DEVICEW.DeviceString
     /// Description is **not** unique.
     pub(crate) device_description: String,
@@ -125,6 +126,10 @@ fn flag_set<T: std::ops::BitAnd<Output = T> + std::cmp::PartialEq + Copy>(t: T, 
 impl crate::blocking::Brightness for BlockingDeviceImpl {
     fn device_name(&self) -> Result<String, Error> {
         Ok(self.device_name.clone())
+    }
+
+    fn friendly_device_name(&self) -> Result<String, Error> {
+        Ok(self.friendly_name.clone())
     }
 
     fn get(&self) -> Result<u32, Error> {
@@ -194,6 +199,7 @@ pub(crate) fn brightness_devices() -> impl Iterator<Item = Result<BlockingDevice
                                 physical_monitor,
                                 file_handle,
                                 device_name: wchar_to_string(&display_device.DeviceName),
+                                friendly_name: wchar_to_string(&info.monitorFriendlyDeviceName),
                                 device_description: wchar_to_string(&display_device.DeviceString),
                                 device_key: wchar_to_string(&display_device.DeviceKey),
                                 device_path: wchar_to_string(&display_device.DeviceID),

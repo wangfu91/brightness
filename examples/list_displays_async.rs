@@ -18,6 +18,7 @@ async fn run() {
 
 async fn show_brightness(dev: &BrightnessDevice) -> Result<(), brightness::Error> {
     println!("Display {}", dev.device_name().await?);
+    println!("\tFriendly name = {}", dev.friendly_device_name().await?);
     println!("\tBrightness = {}%", dev.get().await?);
     show_platform_specific_info(dev).await?;
     Ok(())

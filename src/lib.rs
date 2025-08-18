@@ -79,6 +79,9 @@ mod r#async {
         /// Returns the device name.
         fn device_name(&self) -> impl Future<Output = Result<String, Error>> + Send;
 
+        /// Returns the user friendly device name.
+        fn friendly_device_name(&self) -> impl Future<Output = Result<String, Error>> + Send;
+
         /// Returns the current brightness as a percentage.
         fn get(&self) -> impl Future<Output = Result<u32, Error>> + Send;
 
@@ -93,6 +96,10 @@ mod r#async {
     impl Brightness for BrightnessDevice {
         async fn device_name(&self) -> Result<String, Error> {
             self.0.device_name().await
+        }
+
+        async fn friendly_device_name(&self) -> Result<String, Error> {
+            self.0.friendly_device_name().await
         }
 
         async fn get(&self) -> Result<u32, Error> {

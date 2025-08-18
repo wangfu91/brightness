@@ -22,6 +22,10 @@ impl crate::blocking::Brightness for BlockingDeviceImpl {
         Ok(self.device.clone())
     }
 
+    fn friendly_device_name(&self) -> Result<String, Error> {
+        Ok(self.device.clone())
+    }
+
     fn get(&self) -> Result<u32, Error> {
         let max = read_value(&self.device, Value::Max)?;
         let actual = read_value(&self.device, Value::Actual)?;
